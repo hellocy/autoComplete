@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>tools-autoComplete</title>
+        <link rel="stylesheet" href="jquery.tag-editor.css"/>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <h1>autoComplete</h1>
+            <input type="text" id="info">
+        </div>
+        <script src="jquery-1.11.0.min.js" type="text/javascript"></script>
+        <script src="jquery.autocomplete.js" type="text/javascript"></script>
+        <script>
+
+            //扩展browser方法
+            jQuery.extend({  
+                browser: function(){  
+                    var  rwebkit = /(webkit)\/([\w.]+)/,  
+                    ropera = /(opera)(?:.*version)?[ \/]([\w.]+)/,  
+                    rmsie = /(msie) ([\w.]+)/,  
+                    rmozilla = /(mozilla)(?:.*? rv:([\w.]+))?/,      
+                    browser = {},  
+                    ua = window.navigator.userAgent,  
+                    browserMatch = uaMatch(ua);  
+                    if (browserMatch.browser) {  
+                        browser[browserMatch.browser] = true;  
+                        browser.version = browserMatch.version;  
+                    }  
+                    return { browser: browser };  
+                }  
+            }); 
+
+            var data = [
+                {
+                    "name":"周培",
+                    "desc":"美丽又勇敢"
+                },
+                {
+                    "name":"周冬雨",
+                    "desc":"简直没法看"
+                },{
+                    "name":"佟丽娅",
+                    "desc":"演技不错"
+                }
+            ];
+        
+            $('input#info').autocomplete2(data, {
+                max: 10,    //列表里的条目数
+                minChars: 1,    //自动完成激活之前填入的最小字符
+                width:$('input#info').outerWidth(),     //提示的宽度，溢出隐藏
+                scrollHeight: 200,   //提示的高度，溢出显示滚动条
+                matchContains: true,    //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
+                autoFill: false,    //自动填充
+                mustMatch: true,
+                formatItem: function(item) {
+                  return item.name +'('+item.desc+')';
+                }
+            }).result(function(event, row, formatted) {
+                if(row){
+                  $('input#info').val(row.brand_code);
+                }
+            });
+        </script>
+    </body>
+</html>
+
+
+
