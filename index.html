@@ -5,12 +5,20 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>tools-autoComplete</title>
         <link rel="stylesheet" href="jquery.tag-editor.css"/>
+        <style>
+            #info{
+                width:200px;
+                height:30px;
+                padding:5px;
+                font-size:20px;
+            }
+        </style>
     </head>
 
     <body>
         <div class="wrapper">
             <h1>autoComplete</h1>
-            <input type="text" id="info">
+            <input type="text" id="info" placeholder="周或佟">
         </div>
         <script src="jquery-1.11.0.min.js" type="text/javascript"></script>
         <script src="jquery.autocomplete.js" type="text/javascript"></script>
@@ -60,8 +68,9 @@
                   return item.name +'('+item.desc+')';
                 }
             }).result(function(event, row, formatted) {
+                console.log(row)
                 if(row){
-                  $('input#info').val(row.brand_code);
+                  $('input#info').val(row.name);
                 }
             });
         </script>
